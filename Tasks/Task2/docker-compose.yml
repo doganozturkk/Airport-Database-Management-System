@@ -1,0 +1,21 @@
+services:
+
+  mysql:
+    container_name: mysql-pb
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=superSafePassword
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    container_name: phpmyadmin-pb
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    environment:
+      PMA_HOST: mysql-pb
